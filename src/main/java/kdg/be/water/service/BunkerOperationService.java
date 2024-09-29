@@ -43,7 +43,7 @@ public class BunkerOperationService {
             throw new IllegalArgumentException("DockOperation not found for vessel number: " + vesselNumber);
         }
 
-        BunkerOperation bunkerOperation = new BunkerOperation(vesselNumber, bunkerOperationDate);
+        BunkerOperation bunkerOperation = new BunkerOperation(bunkerOperationDate, vesselNumber);
         BunkerOperation savedBunkerOperation = bunkerOperationRepository.save(bunkerOperation);
 
         DockOperation dockOperation = dockOperationOptional.get();

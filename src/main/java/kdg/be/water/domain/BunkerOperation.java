@@ -29,7 +29,7 @@ public class BunkerOperation {
     public BunkerOperation() {
     }
 
-    public BunkerOperation(String vesselNumber, LocalDateTime bunkerOperationDate) {
+    public BunkerOperation(LocalDateTime bunkerOperationDate, String vesselNumber) {
         this.vesselNumber = vesselNumber;
         this.bunkerOperationDate = bunkerOperationDate;
     }
