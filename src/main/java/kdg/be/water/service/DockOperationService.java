@@ -31,7 +31,8 @@ public class DockOperationService {
                 .collect(Collectors.toList());
 
         DockOperation dockOperation = new DockOperation(arrivalTime, location, vesselNumber, purchaseOrders);
-        InspectionOperation inspectionOperation = new InspectionOperation(LocalDate.now(), true);
+        //TODO: is this how we should save the inspectionOperation? Should we actually plan it?
+        InspectionOperation inspectionOperation = new InspectionOperation(LocalDate.now());
         dockOperation.setInspectionOperation(inspectionOperation);
         return dockOperationRepository.save(dockOperation);
     }
