@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
@@ -18,7 +19,7 @@ public class InspectionOperation {
     private UUID inspectionOperationId;
 
     @NotBlank(message = "An inspection operation must have an inspection date")
-    private LocalDateTime inspectionDate;
+    private LocalDate inspectionDate;
 
     @Setter
     private boolean inspectionSuccess;
@@ -26,7 +27,7 @@ public class InspectionOperation {
     public InspectionOperation() {
     }
 
-    public InspectionOperation(LocalDateTime inspectionDate, boolean inspectionSuccess) {
+    public InspectionOperation(LocalDate inspectionDate, boolean inspectionSuccess) {
         this.inspectionDate = inspectionDate;
         this.inspectionSuccess = inspectionSuccess;
     }
