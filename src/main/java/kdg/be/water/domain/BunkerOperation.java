@@ -1,9 +1,11 @@
 package kdg.be.water.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -15,22 +17,20 @@ public class BunkerOperation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID bunkerOperationId;
 
-    @Column(nullable = false)
+    @NotBlank(message = "A bunker operation must have a vessel number")
     private String vesselNumber;
 
-    @Column(nullable = false)
-    private Date timestamp;
+    @NotBlank(message = "A bunker operation must have a bunker operation date")
+    private LocalDateTime bunkerOperationDate;
 
     @Setter
-    @Column(nullable = false)
     private boolean isSuccessful;
 
     public BunkerOperation() {
     }
 
-    public BunkerOperation(String vesselNumber, Date timestamp, boolean isSuccessful) {
+    public BunkerOperation(String vesselNumber, LocalDateTime bunkerOperationDate) {
         this.vesselNumber = vesselNumber;
-        this.timestamp = timestamp;
-        this.isSuccessful = isSuccessful;
+        this.bunkerOperationDate = bunkerOperationDate;
     }
 }
