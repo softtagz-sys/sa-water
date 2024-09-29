@@ -3,7 +3,6 @@ package kdg.be.water.service;
 import kdg.be.water.domain.DockOperation;
 import kdg.be.water.domain.InspectionOperation;
 import kdg.be.water.domain.order.PurchaseOrder;
-import kdg.be.water.exception.PurchaseOrderNotFoundException;
 import kdg.be.water.repository.DockOperationRepository;
 import kdg.be.water.repository.PurchaseOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class DockOperationService {
     public DockOperation createDockOperation(LocalDateTime arrivalTime, String location, String vesselNumber, List<UUID> purchaseOrderIds) {
         List<PurchaseOrder> purchaseOrders = purchaseOrderIds.stream()
                 .map(id -> purchaseOrderRepository.findById(id)
-                        .orElseThrow(() -> new PurchaseOrderNotFoundException("PurchaseOrder not found for ID: " + id)))
+                        .orElseThrow(() -> new RuntimeException("PurchaseOrder not found for ID: " + id)))
                 .collect(Collectors.toList());
 
         DockOperation dockOperation = new DockOperation(arrivalTime, location, vesselNumber, purchaseOrders);
