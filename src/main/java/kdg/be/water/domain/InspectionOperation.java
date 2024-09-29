@@ -27,8 +27,7 @@ public class InspectionOperation {
     public InspectionOperation() {
     }
 
-    public InspectionOperation(LocalDate inspectionDate, boolean inspectionSuccess) {
+    public InspectionOperation(LocalDate inspectionDate) {
         this.inspectionDate = inspectionDate;
-        this.inspectionSuccess = inspectionSuccess;
     }
 }
