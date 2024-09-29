@@ -37,22 +37,25 @@ public class DockOperation {
     private List<PurchaseOrder> purchaseOrders = new ArrayList<>();
 
     @NotNull(message = "A dock operation must have an inspection operation")
+    @Setter
     @OneToOne
     @JoinColumn(name = "inspection_operation_id")
     private InspectionOperation inspectionOperation;
 
     @NotNull(message = "A dock operation must have a bunker operation")
     @OneToOne
+    @Setter
     @JoinColumn(name = "bunker_operation_id")
     private BunkerOperation bunkerOperation;
 
     public DockOperation() {
     }
 
-    public DockOperation(LocalDateTime arrivalTime, String location, String vesselNumber) {
+    public DockOperation(LocalDateTime arrivalTime, String location, String vesselNumber, List<PurchaseOrder> purchaseOrders) {
         this.arrivalTime = arrivalTime;
         this.location = location;
         this.vesselNumber = vesselNumber;
+        this.purchaseOrders.addAll(purchaseOrders);
     }
 
     public DockOperation(LocalDateTime arrivalTime, String location, String vesselNumber, InspectionOperation inspectionOperation, BunkerOperation bunkerOperation) {
