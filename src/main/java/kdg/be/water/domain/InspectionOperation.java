@@ -19,6 +19,7 @@ public class InspectionOperation {
     private UUID inspectionOperationId;
 
     @NotBlank(message = "An inspection operation must have an inspection date")
+    @Setter
     private LocalDate inspectionDate;
 
     @Setter
