@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/dock-operations")
@@ -23,7 +24,7 @@ public class DockOperationController {
     public ResponseEntity<DockOperation> createAndArriveAtDock(@RequestParam LocalDateTime arrivalTime,
                                                                @RequestParam String location,
                                                                @RequestParam String vesselNumber,
-                                                               @RequestBody List<PurchaseOrder> purchaseOrders) {
+                                                               @RequestBody List<UUID> purchaseOrders) {
         DockOperation dockOperation = dockOperationService.createDockOperation(arrivalTime, location, vesselNumber, purchaseOrders);
         return ResponseEntity.ok(dockOperation);
     }
