@@ -21,28 +21,29 @@ public class DockOperation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID dockOperationId;
 
-    @NotBlank(message = "A dock operation must have an arrival time")
+    @NotBlank()
     private LocalDateTime arrivalTime;
 
     @Setter
     private LocalDateTime departureTime;
 
-    @NotBlank(message = "A dock operation must have a location")
+    @NotBlank()
     private String location;
 
-    @NotBlank(message = "A dock operation must have a vessel number")
+    @NotBlank()
     private String vesselNumber;
 
+    @Setter
     @OneToMany(mappedBy = "dockOperation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PurchaseOrder> purchaseOrders = new ArrayList<>();
 
-    @NotNull(message = "A dock operation must have an inspection operation")
+    @NotNull()
     @Setter
     @OneToOne
     @JoinColumn(name = "inspection_operation_id")
     private InspectionOperation inspectionOperation;
 
-    @NotNull(message = "A dock operation must have a bunker operation")
+    @NotNull()
     @OneToOne
     @Setter
     @JoinColumn(name = "bunker_operation_id")
