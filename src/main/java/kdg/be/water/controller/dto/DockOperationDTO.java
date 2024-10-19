@@ -13,14 +13,14 @@ public class DockOperationDTO {
     private LocalDateTime arrivalTime;
     private String location;
     private String vesselNumber;
-    private List<String> purchaseOrders;
+    private List<String> purchaseOrderNumbers;
     private UUID customerId;
 
-    public DockOperationDTO(LocalDateTime arrivalTime, String location, String vesselNumber, List<String> purchaseOrders, UUID customerId) {
+    public DockOperationDTO(LocalDateTime arrivalTime, String location, String vesselNumber, List<String> purchaseOrderNumbers, UUID customerId) {
         this.arrivalTime = arrivalTime;
         this.location = location;
         this.vesselNumber = vesselNumber;
-        this.purchaseOrders = purchaseOrders;
+        this.purchaseOrderNumbers = purchaseOrderNumbers;
         this.customerId = customerId;
     }
 }

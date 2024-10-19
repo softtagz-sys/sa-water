@@ -29,7 +29,7 @@ public class DockOperationController {
                 dockOperationDTO.getArrivalTime(),
                 dockOperationDTO.getLocation(),
                 dockOperationDTO.getVesselNumber(),
-                dockOperationDTO.getPurchaseOrders(),
+                dockOperationDTO.getPurchaseOrderNumbers(),
                 seller
         );
         return ResponseEntity.ok(dockOperation);

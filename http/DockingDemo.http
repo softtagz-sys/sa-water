@@ -1,18 +1,22 @@
+### Obtain JWT Token
+POST http://localhost:8180/realms/water-realm/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=water-app-client&client_secret=VNV3owmEPblLorj3KEELrJNnLyqiQRjC&username=captain_user&password=password&grant_type=password
+
+> {% client.global.set("ACCESS_TOKEN", response.body.access_token) %}
+
 ### Create and Arrive at Dock Operation
 POST http://localhost:8081/api/dock-operations/arrive
 Content-Type: application/json
+Authorization: Bearer {{ACCESS_TOKEN}}
 
 {
   "arrivalTime": "2023-10-01T10:00:00",
   "location": "Dock A",
   "vesselNumber": "V12345",
   "purchaseOrders": [
-    {
-      "orderId": "5ddf0596-7676-4886-9acf-1e7dfc248206"
-    },
-    {
-      "orderId": "1a5b338a-98c2-4113-960c-a752da15e5bc"
-    }
+    "PO123456"
   ],
   "customerId": "9ae35800-5fdf-4932-a713-251f49e11012"
 }
