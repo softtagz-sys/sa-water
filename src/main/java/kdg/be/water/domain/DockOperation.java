@@ -1,10 +1,8 @@
 package kdg.be.water.domain;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import kdg.be.water.domain.order.PurchaseOrder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,28 +19,30 @@ public class DockOperation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID dockOperationId;
 
-    @NotBlank(message = "A dock operation must have an arrival time")
+    @NotBlank
     private LocalDateTime arrivalTime;
 
     @Setter
     private LocalDateTime departureTime;
 
-    @NotBlank(message = "A dock operation must have a location")
+    @NotBlank
     private String location;
 
-    @NotBlank(message = "A dock operation must have a vessel number")
+    @NotBlank
     private String vesselNumber;
 
-    @OneToMany(mappedBy = "dockOperation", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PurchaseOrder> purchaseOrders = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(name = "purchase_order_numbers", joinColumns = @JoinColumn(name = "dock_operation_id"))
+    @Column(name = "purchase_order_number")
+    private List<String> purchaseOrderNumbers = new ArrayList<>();
 
-    @NotNull(message = "A dock operation must have an inspection operation")
+    @NotNull
     @Setter
     @OneToOne
     @JoinColumn(name = "inspection_operation_id")
     private InspectionOperation inspectionOperation;
 
-    @NotNull(message = "A dock operation must have a bunker operation")
+    @NotNull
     @OneToOne
     @Setter
     @JoinColumn(name = "bunker_operation_id")
@@ -51,11 +51,11 @@ public class DockOperation {
     public DockOperation() {
     }
 
-    public DockOperation(LocalDateTime arrivalTime, String location, String vesselNumber, List<PurchaseOrder> purchaseOrders) {
+    public DockOperation(LocalDateTime arrivalTime, String location, String vesselNumber, List<String> purchaseOrderNumbers) {
         this.arrivalTime = arrivalTime;
         this.location = location;
         this.vesselNumber = vesselNumber;
-        this.purchaseOrders.addAll(purchaseOrders);
+        this.purchaseOrderNumbers.addAll(purchaseOrderNumbers);
     }
 
     public DockOperation(LocalDateTime arrivalTime, String location, String vesselNumber, InspectionOperation inspectionOperation, BunkerOperation bunkerOperation) {
