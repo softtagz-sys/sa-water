@@ -2,24 +2,24 @@ package kdg.be.water.controller.api;
 
 import kdg.be.water.domain.DockOperation;
 import kdg.be.water.controller.dto.DockOperationDTO;
-import kdg.be.water.domain.customer.Customer;
+import kdg.be.water.domain.Customer;
 import kdg.be.water.service.CustomerService;
 import kdg.be.water.service.DockOperationService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/dock-operations")
 public class DockOperationController {
+    private final DockOperationService dockOperationService;
 
-    @Autowired
-    private DockOperationService dockOperationService;
+    private final CustomerService customerService;
 
-    @Autowired
-    private CustomerService customerService;
+    public DockOperationController(DockOperationService dockOperationService, CustomerService customerService) {
+        this.dockOperationService = dockOperationService;
+        this.customerService = customerService;
+    }
 
     @PostMapping("/arrive")
     public ResponseEntity<DockOperation> createAndArriveAtDock(@RequestBody DockOperationDTO dockOperationDTO) {

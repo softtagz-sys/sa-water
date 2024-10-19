@@ -1,7 +1,7 @@
 // src/main/java/kdg/be/water/repository/CustomerRepository.java
 package kdg.be.water.repository;
 
-import kdg.be.water.domain.customer.Customer;
+import kdg.be.water.domain.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
