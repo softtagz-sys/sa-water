@@ -17,10 +17,10 @@ public class BunkerOperation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID bunkerOperationId;
 
-    @NotBlank(message = "A bunker operation must have a vessel number")
+    @NotBlank
     private String vesselNumber;
 
-    @NotBlank(message = "A bunker operation must have a bunker operation date")
+    @NotBlank
     private LocalDateTime bunkerOperationDate;
 
     @Setter

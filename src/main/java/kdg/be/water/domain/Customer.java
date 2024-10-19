@@ -1,4 +1,4 @@
-package kdg.be.water.domain.customer;
+package kdg.be.water.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -16,10 +16,10 @@ public class Customer {
     private UUID customerId;
 
     @Column(unique = true)
-    @NotBlank(message = "A customer must have a name")
+    @NotBlank
     private String name;
 
-    @NotBlank(message = "A customer must have an address")
+    @NotBlank
     private String address;
 
     public Customer() {

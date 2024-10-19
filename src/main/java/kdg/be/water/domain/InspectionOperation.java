@@ -18,7 +18,7 @@ public class InspectionOperation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID inspectionOperationId;
 
-    @NotBlank(message = "An inspection operation must have an inspection date")
+    @NotBlank
     @Setter
     private LocalDate inspectionDate;
 

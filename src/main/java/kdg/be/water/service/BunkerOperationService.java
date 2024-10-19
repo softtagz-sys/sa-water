@@ -4,7 +4,6 @@ import kdg.be.water.domain.BunkerOperation;
 import kdg.be.water.domain.DockOperation;
 import kdg.be.water.repository.BunkerOperationRepository;
 import kdg.be.water.repository.DockOperationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -16,17 +15,20 @@ import java.util.Optional;
 @Service
 public class BunkerOperationService {
 
-    @Autowired
-    private BunkerOperationRepository bunkerOperationRepository;
+    private final BunkerOperationRepository bunkerOperationRepository;
 
-    @Autowired
-    private DockOperationRepository dockOperationRepository;
+    private final DockOperationRepository dockOperationRepository;
 
     @Value("${bunker.operation.max-per-day}")
     private int maxBunkerOperationsPerDay;
 
     @Value("${bunker.operation.duration-hours}")
     private int bunkerOperationDurationHours;
+
+    public BunkerOperationService(BunkerOperationRepository bunkerOperationRepository, DockOperationRepository dockOperationRepository) {
+        this.bunkerOperationRepository = bunkerOperationRepository;
+        this.dockOperationRepository = dockOperationRepository;
+    }
 
     public BunkerOperation createBunkerOperation(LocalDateTime bunkerOperationDate, String vesselNumber) {
         LocalDateTime startOfDay = bunkerOperationDate.truncatedTo(ChronoUnit.DAYS);
