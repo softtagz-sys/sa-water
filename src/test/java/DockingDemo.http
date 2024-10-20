@@ -15,8 +15,9 @@ Authorization: Bearer {{ACCESS_TOKEN}}
   "arrivalTime": "2023-10-01T10:00:00",
   "location": "Dock A",
   "vesselNumber": "V12345",
-  "purchaseOrders": [
-    "PO123456"
+  "purchaseOrderNumbers": [
+    "PO123456",
+    "PO123457"
   ],
-  "customerId": "9ae35800-5fdf-4932-a713-251f49e11012"
+  "sellerId": "9ae35800-5fdf-4932-a713-251f49e11012"
 }
