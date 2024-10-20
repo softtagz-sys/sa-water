@@ -6,6 +6,7 @@ import kdg.be.water.domain.Customer;
 import kdg.be.water.service.CustomerService;
 import kdg.be.water.service.DockOperationService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
@@ -22,6 +23,7 @@ public class DockOperationController {
     }
 
     @PostMapping("/arrive")
+    @PreAuthorize("hasAuthority('captain')")
     public ResponseEntity<DockOperation> createAndArriveAtDock(@RequestBody DockOperationDTO dockOperationDTO) {
         UUID customerId = dockOperationDTO.getCustomerId();
         Customer seller = customerService.getCustomerById(customerId);
