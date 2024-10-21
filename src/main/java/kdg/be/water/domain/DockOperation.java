@@ -14,15 +14,15 @@ import java.util.UUID;
 @Entity
 @Table(name = "dock_operations")
 @Getter
+@Setter
 public class DockOperation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID dockOperationId;
 
-    @NotBlank
+    @NotNull
     private LocalDateTime arrivalTime;
 
-    @Setter
     private LocalDateTime departureTime;
 
     @NotBlank
@@ -37,32 +37,33 @@ public class DockOperation {
     private List<String> purchaseOrderNumbers = new ArrayList<>();
 
     @NotNull
-    @Setter
-    @OneToOne
+    private UUID sellerId;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "inspection_operation_id")
     private InspectionOperation inspectionOperation;
 
-    @NotNull
     @OneToOne
-    @Setter
     @JoinColumn(name = "bunker_operation_id")
     private BunkerOperation bunkerOperation;
 
     public DockOperation() {
     }
 
-    public DockOperation(LocalDateTime arrivalTime, String location, String vesselNumber, List<String> purchaseOrderNumbers) {
+    public DockOperation(LocalDateTime arrivalTime, String location, String vesselNumber, List<String> purchaseOrderNumbers, UUID sellerId) {
         this.arrivalTime = arrivalTime;
         this.location = location;
         this.vesselNumber = vesselNumber;
         this.purchaseOrderNumbers.addAll(purchaseOrderNumbers);
+        this.sellerId = sellerId;
     }
 
-    public DockOperation(LocalDateTime arrivalTime, String location, String vesselNumber, InspectionOperation inspectionOperation, BunkerOperation bunkerOperation) {
+    public DockOperation(LocalDateTime arrivalTime, String location, String vesselNumber, InspectionOperation inspectionOperation, BunkerOperation bunkerOperation, UUID sellerId) {
         this.arrivalTime = arrivalTime;
         this.location = location;
         this.vesselNumber = vesselNumber;
         this.inspectionOperation = inspectionOperation;
         this.bunkerOperation = bunkerOperation;
+        this.sellerId = sellerId;
     }
 }

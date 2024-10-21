@@ -40,13 +40,14 @@ dependencies {
 	testImplementation("org.testcontainers:junit-jupiter:1.17.3") // Testcontainers for JUnit
 	testImplementation("org.testcontainers:postgresql:1.17.3") // Testcontainers for PostgreSQL
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher") // JUnit Platform Launcher
+	testImplementation ("org.springframework.security:spring-security-test") // Spring Security testing
 
 	// Lombok
 	compileOnly("org.projectlombok:lombok") // Lombok for reducing boilerplate code
 	annotationProcessor("org.projectlombok:lombok") // Lombok annotation processor
 
 	// Security
-	implementation("org.springframework.boot:spring-boot-starter-oauth2-client") // OAuth2 client
+	implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server") // OAuth2 server
 	implementation("org.springframework.boot:spring-boot-starter-security") // Spring Security
 	implementation("org.springframework.security:spring-security-oauth2-jose") // JOSE for OAuth2
 }

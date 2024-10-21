@@ -2,6 +2,7 @@ package kdg.be.water.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,8 +19,7 @@ public class InspectionOperation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID inspectionOperationId;
 
-    @NotBlank
-    @Setter
+    @NotNull
     private LocalDate inspectionDate;
 
     @Setter
