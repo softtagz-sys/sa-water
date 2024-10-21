@@ -33,13 +33,15 @@ public class DockOperationController {
         return ResponseEntity.ok(savedDockOperation);
     }
 
+    //TODO: how do we check the loading state?
+    //TODO: Implement the loading state
     @GetMapping("/overview/{id}")
     @PreAuthorize("hasAuthority('captain')")
     public ShipOverviewDTO getOverview(@PathVariable UUID id) {
         return dockOperationService.getOverview(id);
     }
 
-    //TODO: how do we need to handle this?
+    //TODO: how do we/do we need to handle this?
     @PostMapping("/leave/{id}")
     @PreAuthorize("hasAuthority('captain')")
     public void leave(@PathVariable UUID id) {
