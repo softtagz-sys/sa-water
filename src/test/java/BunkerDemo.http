@@ -1,0 +1,17 @@
+### Obtain JWT Token
+POST http://localhost:8180/realms/water-realm/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=water-app-client&client_secret=VNV3owmEPblLorj3KEELrJNnLyqiQRjC&username=tanker_user&password=password&grant_type=password
+
+> {% client.global.set("ACCESS_TOKEN", response.body.access_token) %}
+
+### Create a bunker operation
+POST http://localhost:8081/api/bunker-operations/plan
+Content-Type: application/json
+Authorization: Bearer {{ACCESS_TOKEN}}
+
+{
+  "bunkerOperationDate": "2023-10-05T14:48:00.000Z",
+  "vesselNumber": "V12345"
+}
