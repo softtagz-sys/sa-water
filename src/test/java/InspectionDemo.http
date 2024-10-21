@@ -1,0 +1,24 @@
+### Obtain JWT Token
+POST http://localhost:8180/realms/water-realm/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=water-app-client&client_secret=VNV3owmEPblLorj3KEELrJNnLyqiQRjC&username=inspector_user&password=password&grant_type=password
+
+> {% client.global.set("ACCESS_TOKEN", response.body.access_token) %}
+
+### Get Open Inspection Operations
+GET http://localhost:8081/api/inspection-operations/open
+Authorization: Bearer {{ACCESS_TOKEN}}
+
+### Get Inspection Operations by Date
+GET http://localhost:8081/api/inspection-operations/date?date=2023-10-01
+Authorization: Bearer {{ACCESS_TOKEN}}
+
+### Set Inspection Success
+PUT http://localhost:8081/api/inspection-operations/success
+Content-Type: application/json
+Authorization: Bearer {{ACCESS_TOKEN}}
+
+{
+  "id": "b6bb5d92-216b-4e62-be61-da88e28a92f5"
+}
