@@ -35,16 +35,16 @@ public class DockOperationController {
 
     //TODO: how do we check the loading state?
     //TODO: Implement the loading state
-    @GetMapping("/overview/{id}")
+    @GetMapping("/overview/{vesselNumber}")
     @PreAuthorize("hasAuthority('captain')")
-    public ShipOverviewDTO getOverview(@PathVariable UUID id) {
-        return dockOperationService.getOverview(id);
+    public ShipOverviewDTO getOverview(@PathVariable String vesselNumber) {
+        return dockOperationService.getOverview(vesselNumber);
     }
 
     //TODO: how do we/do we need to handle this?
     @PostMapping("/leave/{id}")
     @PreAuthorize("hasAuthority('captain')")
-    public void leave(@PathVariable UUID id) {
-        dockOperationService.leave(id);
+    public void leave(@PathVariable String vesselNumber) {
+        dockOperationService.leave(vesselNumber);
     }
 }
