@@ -29,7 +29,7 @@ public class InspectionOperationService {
     public Optional<InspectionOperation> setInspectionSuccess(UUID id) {
         Optional<InspectionOperation> inspectionOperation = inspectionOperationRepository.findById(id);
         inspectionOperation.ifPresent(inspection -> {
-            inspection.setInspectionSuccess(true);
+            inspection.setIsSuccessful(true);
             inspectionOperationRepository.save(inspection);
         });
         return inspectionOperation;
