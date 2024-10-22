@@ -42,8 +42,9 @@ public class DockOperationService {
         }
     }
 
-    public ShipOverviewDTO getOverview(UUID id) {
-        DockOperation dockOperation = dockOperationRepository.findById(id).orElseThrow(() -> new RuntimeException("DockOperation not found"));
+    public ShipOverviewDTO getOverview(String vesselNumber) {
+
+        DockOperation dockOperation = dockOperationRepository.findByVesselNumber(vesselNumber).orElseThrow(() -> new RuntimeException("DockOperation not found"));
 
         InspectionOperation inspectionOperation = dockOperation.getInspectionOperation();
         boolean inspectionSuccess = inspectionOperation.isSuccessful();
@@ -55,10 +56,22 @@ public class DockOperationService {
         return new ShipOverviewDTO(inspectionSuccess, bunkerOperationPlanned, bunkerOperationSuccess);
     }
 
-    public void leave(UUID id) {
-        DockOperation dockOperation = dockOperationRepository.findById(id).orElseThrow(() -> new RuntimeException("DockOperation not found"));
-        dockOperation.setLeft(true);
+    @Transactional
+    public void leave(String vesselNumber) {
+        ShipOverviewDTO overview = getOverview(vesselNumber);
+
+        if (!overview.isInspectionSuccess()) {
+            throw new RuntimeException("Inspection operation is not successful. Ship cannot leave.");
+        }
+
+        if (overview.isBunkerOperationPlanned() && !overview.isBunkerOperationSuccess()) {
+            throw new RuntimeException("Bunker operation is not successful. Ship cannot leave.");
+        }
+
+        DockOperation dockOperation = dockOperationRepository.findByVesselNumber(vesselNumber)
+                .orElseThrow(() -> new RuntimeException("DockOperation not found"));
+        dockOperation.setHasLeft(true);
         dockOperationRepository.save(dockOperation);
-        logger.info("Ship with ID {} has left the dock", id);
+        logger.info("Ship with vessel number {} has left the dock", vesselNumber);
     }
 }
