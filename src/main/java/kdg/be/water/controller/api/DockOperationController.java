@@ -1,5 +1,6 @@
 package kdg.be.water.controller.api;
 
+import kdg.be.water.controller.dto.ShipOverviewDTO;
 import kdg.be.water.domain.DockOperation;
 import kdg.be.water.controller.dto.DockOperationDTO;
 import kdg.be.water.service.CustomerService;
@@ -30,5 +31,20 @@ public class DockOperationController {
         );
         DockOperation savedDockOperation = dockOperationService.createDockOperation(dockOperation);
         return ResponseEntity.ok(savedDockOperation);
+    }
+
+    //TODO: how do we check the loading state?
+    //TODO: Implement the loading state
+    @GetMapping("/overview/{vesselNumber}")
+    @PreAuthorize("hasAuthority('captain')")
+    public ShipOverviewDTO getOverview(@PathVariable String vesselNumber) {
+        return dockOperationService.getOverview(vesselNumber);
+    }
+
+    //TODO: how do we/do we need to handle this?
+    @PostMapping("/leave/{id}")
+    @PreAuthorize("hasAuthority('captain')")
+    public void leave(@PathVariable String vesselNumber) {
+        dockOperationService.leave(vesselNumber);
     }
 }
