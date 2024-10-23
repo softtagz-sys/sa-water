@@ -1,14 +1,12 @@
 package kdg.be.water.controller.api;
 
-import kdg.be.water.controller.dto.ShipOverviewDTO;
 import kdg.be.water.domain.DockOperation;
 import kdg.be.water.controller.dto.DockOperationDTO;
-import kdg.be.water.service.CustomerService;
+import kdg.be.water.domain.domainclass.ShipOverview;
 import kdg.be.water.service.DockOperationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/dock-operations")
@@ -33,16 +31,13 @@ public class DockOperationController {
         return ResponseEntity.ok(savedDockOperation);
     }
 
-    //TODO: how do we check the loading state?
-    //TODO: Implement the loading state
     @GetMapping("/overview/{vesselNumber}")
     @PreAuthorize("hasAuthority('captain')")
-    public ShipOverviewDTO getOverview(@PathVariable String vesselNumber) {
+    public ShipOverview getOverview(@PathVariable String vesselNumber) {
         return dockOperationService.getOverview(vesselNumber);
     }
 
-    //TODO: how do we/do we need to handle this?
-    @PostMapping("/leave/{id}")
+    @PostMapping("/leave/{vesselNumber}")
     @PreAuthorize("hasAuthority('captain')")
     public void leave(@PathVariable String vesselNumber) {
         dockOperationService.leave(vesselNumber);

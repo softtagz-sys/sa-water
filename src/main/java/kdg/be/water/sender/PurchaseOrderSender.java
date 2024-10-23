@@ -20,13 +20,12 @@ public class PurchaseOrderSender {
     private final RestTemplate restTemplate;
     private final String purchaseOrderCompleteUrl;
 
-    @Autowired
     public PurchaseOrderSender(RestTemplate restTemplate, @Value("${purchase.order.complete.url}") String purchaseOrderCompleteUrl) {
         this.restTemplate = restTemplate;
         this.purchaseOrderCompleteUrl = purchaseOrderCompleteUrl;
     }
 
-    public void completePurchaseOrder(UUID sellerId, List<String> poNumbers) {
+    public boolean completePurchaseOrder(UUID sellerId, List<String> poNumbers) {
         PurchaseOrderCompleteDTO request = new PurchaseOrderCompleteDTO(sellerId, poNumbers);
 
         logger.info("Sending request to complete purchase order with sellerId: {} and poNumbers: {}", sellerId, poNumbers);
@@ -35,8 +34,10 @@ public class PurchaseOrderSender {
 
         if (response.getStatusCode().is2xxSuccessful()) {
             logger.info("Purchase order completed successfully.");
+            return true;
         } else {
             logger.error("Failed to complete purchase order. Status code: {}", response.getStatusCode());
+            return false;
         }
     }
 }
