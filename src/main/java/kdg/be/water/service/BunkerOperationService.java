@@ -1,5 +1,6 @@
 package kdg.be.water.service;
 
+import jakarta.transaction.Transactional;
 import kdg.be.water.domain.BunkerOperation;
 import kdg.be.water.domain.DockOperation;
 import kdg.be.water.repository.BunkerOperationRepository;
@@ -30,6 +31,7 @@ public class BunkerOperationService {
         this.dockOperationRepository = dockOperationRepository;
     }
 
+    @Transactional
     public BunkerOperation createBunkerOperation(LocalDateTime bunkerOperationDate, String vesselNumber) {
         LocalDateTime startOfDay = bunkerOperationDate.truncatedTo(ChronoUnit.DAYS);
         LocalDateTime endOfDay = startOfDay.plusDays(1);
@@ -53,5 +55,16 @@ public class BunkerOperationService {
         dockOperationRepository.save(dockOperation);
 
         return savedBunkerOperation;
+    }
+
+    public BunkerOperation setBunkerOperationSuccess(String vesselNumber) {
+        Optional<BunkerOperation> bunkerOperationOptional = bunkerOperationRepository.findByVesselNumber(vesselNumber);
+        if (!bunkerOperationOptional.isPresent()) {
+            throw new IllegalArgumentException("BunkerOperation not found for vessel number: " + vesselNumber);
+        }
+
+        BunkerOperation bunkerOperation = bunkerOperationOptional.get();
+        bunkerOperation.setSuccessful(true);
+        return bunkerOperationRepository.save(bunkerOperation);
     }
 }

@@ -16,7 +16,6 @@ public class BunkerOperationController {
         this.bunkerOperationService = bunkerOperationService;
     }
 
-    //TODO: Refactor? just create or add a complete method?
     @PostMapping("/plan")
     @PreAuthorize("hasAuthority('tanker')")
     public BunkerOperation planBunkerOperation(@RequestBody BunkerOperationDTO bunkerOperationDTO) {
@@ -24,5 +23,11 @@ public class BunkerOperationController {
                 bunkerOperationDTO.getBunkerOperationDate(),
                 bunkerOperationDTO.getVesselNumber()
         );
+    }
+
+    @PostMapping("/success/{vesselNumber}")
+    @PreAuthorize("hasAuthority('tanker')")
+    public BunkerOperation setBunkerOperationSuccess(@PathVariable String vesselNumber) {
+        return bunkerOperationService.setBunkerOperationSuccess(vesselNumber);
     }
 }

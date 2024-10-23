@@ -23,8 +23,6 @@ public class DockOperation {
     @NotNull
     private LocalDateTime arrivalTime;
 
-    private LocalDateTime departureTime;
-
     @NotBlank
     private String location;
 
@@ -40,6 +38,8 @@ public class DockOperation {
     private UUID sellerId;
 
     private boolean hasLeft;
+
+    private boolean isLoaded;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "inspection_operation_id")
@@ -59,6 +59,7 @@ public class DockOperation {
         this.purchaseOrderNumbers.addAll(purchaseOrderNumbers);
         this.sellerId = sellerId;
         this.hasLeft = false;
+        this.isLoaded = false;
     }
 
     public DockOperation(LocalDateTime arrivalTime, String location, String vesselNumber, InspectionOperation inspectionOperation, BunkerOperation bunkerOperation, UUID sellerId) {
@@ -69,5 +70,6 @@ public class DockOperation {
         this.bunkerOperation = bunkerOperation;
         this.sellerId = sellerId;
         this.hasLeft = false;
+        this.isLoaded = false;
     }
 }

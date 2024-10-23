@@ -1,16 +1,16 @@
-package kdg.be.water.controller.dto;
+package kdg.be.water.domain.domainclass;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ShipOverviewDTO {
+public class ShipOverview {
     private boolean inspectionSuccess;
     private boolean bunkerOperationPlanned;
     private boolean bunkerOperationSuccess;
 
-    public ShipOverviewDTO(boolean inspectionSuccess, boolean bunkerOperationPlanned, boolean bunkerOperationSuccess) {
+    public ShipOverview(boolean inspectionSuccess, boolean bunkerOperationPlanned, boolean bunkerOperationSuccess) {
         this.inspectionSuccess = inspectionSuccess;
         this.bunkerOperationPlanned = bunkerOperationPlanned;
         this.bunkerOperationSuccess = bunkerOperationSuccess;
