@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,11 +27,13 @@ public class PurchaseOrderSender {
     }
 
     public boolean completePurchaseOrder(UUID sellerId, List<String> poNumbers) {
-        PurchaseOrderCompleteDTO request = new PurchaseOrderCompleteDTO(sellerId, poNumbers);
+        String url = UriComponentsBuilder.fromHttpUrl(purchaseOrderCompleteUrl)
+                .queryParam("sellerId", sellerId.toString())
+                .toUriString();
 
         logger.info("Sending request to complete purchase order with sellerId: {} and poNumbers: {}", sellerId, poNumbers);
 
-        ResponseEntity<Void> response = restTemplate.postForEntity(purchaseOrderCompleteUrl, request, Void.class);
+        ResponseEntity<Void> response = restTemplate.postForEntity(url, poNumbers, Void.class);
 
         if (response.getStatusCode().is2xxSuccessful()) {
             logger.info("Purchase order completed successfully.");

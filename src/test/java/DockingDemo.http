@@ -16,8 +16,7 @@ Authorization: Bearer {{ACCESS_TOKEN}}
   "location": "Dock A",
   "vesselNumber": "V12345",
   "purchaseOrderNumbers": [
-    "PO123456",
-    "PO123457"
+    "PO123456"
   ],
   "sellerId": "9ae35800-5fdf-4932-a713-251f49e11012"
 }

@@ -10,6 +10,6 @@ import java.util.UUID;
 
 @Repository
 public interface InspectionOperationRepository extends JpaRepository<InspectionOperation, UUID> {
-    List<InspectionOperation> findByInspectionSuccessFalse();
+    List<InspectionOperation> findByIsSuccessfulFalse();
     List<InspectionOperation> findByInspectionDate(LocalDate inspectionDate);
 }

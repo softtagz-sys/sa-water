@@ -19,7 +19,7 @@ public class InspectionOperationService {
     }
 
     public List<InspectionOperation> getOpenInspectionOperations() {
-        return inspectionOperationRepository.findByInspectionSuccessFalse();
+        return inspectionOperationRepository.findByIsSuccessfulFalse();
     }
 
     public List<InspectionOperation> getInspectionOperationsByDate(LocalDate inspectionDate) {
@@ -29,7 +29,7 @@ public class InspectionOperationService {
     public Optional<InspectionOperation> setInspectionSuccess(UUID id) {
         Optional<InspectionOperation> inspectionOperation = inspectionOperationRepository.findById(id);
         inspectionOperation.ifPresent(inspection -> {
-            inspection.setIsSuccessful(true);
+            inspection.setSuccessful(true);
             inspectionOperationRepository.save(inspection);
         });
         return inspectionOperation;
