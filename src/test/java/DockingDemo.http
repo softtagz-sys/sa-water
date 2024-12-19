@@ -20,3 +20,12 @@ Authorization: Bearer {{ACCESS_TOKEN}}
   ],
   "sellerId": "9ae35800-5fdf-4932-a713-251f49e11012"
 }
+
+### Leave Dock Operation
+PUT http://localhost:8081/api/dock-operations/leave
+Content-Type: application/json
+Authorization: Bearer {{ACCESS_TOKEN}}
+
+{
+  "vesselNumber": "V12345"
+}
